@@ -482,7 +482,7 @@ export default function FinancialCalculator() {
 
         {/* Modal */}
         {isModalOpen && (
-          <div className="fixed z-10 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="fixed z-10 p-4 inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg w-full max-w-md">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">Hisoblash natijalari</h2>
@@ -557,21 +557,21 @@ export default function FinancialCalculator() {
               <defs>
                 {/* Default gradient (green to blue) */}
                 <linearGradient id="barGradient" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#34D399" /> {/* Green-400 */}
-                  <stop offset="100%" stopColor="#3B82F6" /> {/* Blue-500 */}
+                  <stop offset="0%" stopColor="#34D399" />
+                  <stop offset="100%" stopColor="#3B82F6" />
                 </linearGradient>
 
                 {/* Hover qilinganda (gray color) */}
                 <linearGradient id="barHoverGradient" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#9CA3AF" /> {/* Gray-400 */}
-                  <stop offset="100%" stopColor="#6B7280" /> {/* Gray-500 */}
+                  <stop offset="0%" stopColor="#9CA3AF" />
+                  <stop offset="100%" stopColor="#6B7280" />
                 </linearGradient>
               </defs>
 
-              <XAxis dataKey="name" stroke="#ccc" />
-              <YAxis stroke="#ccc" tickFormatter={formatNumber} />
+              <XAxis dataKey="name" stroke="#ccc" tick={{ fontSize: 10 }} />
+              <YAxis stroke="#ccc" tick={{ fontSize: 10 }} tickFormatter={formatNumber} />
               <Tooltip
-                wrapperStyle={{ backgroundColor: "#333", color: "black" }}
+                wrapperStyle={{ backgroundColor: "#333", color: "black", fontSize: "10px" }}
                 formatter={(value) => formatNumber(value)}
               />
 
@@ -579,18 +579,19 @@ export default function FinancialCalculator() {
               <Bar
                 dataKey="value"
                 fill="url(#barGradient)"
-                barSize={35}
+                barSize={30}
                 onMouseOver={(e) => (e.target.style.fill = "url(#barHoverGradient)")}
                 onMouseOut={(e) => (e.target.style.fill = "url(#barGradient)")}
               />
             </BarChart>
           </ResponsiveContainer>
 
+
         </div>
       </div>
 
       <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center p-4 items-center min-h-screen">
           <div className="bg-gray-800 text-white p-6 rounded-xl shadow-2xl max-w-md w-full">
             <h5 className="text-2xl font-semibold mb-4 text-center">Hisoblash turini tanlang</h5>
             <RadioGroup value={selectedCalculation} onChange={(e) => setSelectedCalculation(e.target.value)}>
