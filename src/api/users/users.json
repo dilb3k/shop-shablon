@@ -1,3 +1,34 @@
-{
-    
-}
+[
+    {
+        "id": 1,
+        "name": "Ali Valiyev",
+        "email": "ali@example.com",
+        "phone": "+998901234567",
+        "role": "admin",
+        "registeredAt": "2024-01-15T10:00:00Z"
+    },
+    {
+        "id": 2,
+        "name": "Madina Karimova",
+        "email": "madina@example.com",
+        "phone": "+998911112233",
+        "role": "user",
+        "registeredAt": "2024-02-10T14:30:00Z"
+    },
+    {
+        "id": 3,
+        "name": "Bekzod Oripov",
+        "email": "bekzod@example.com",
+        "phone": "+998933332244",
+        "role": "moderator",
+        "registeredAt": "2024-03-05T09:15:00Z"
+    },
+    {
+        "id": 4,
+        "name": "Zuhra Sodiqova",
+        "email": "zuhra@example.com",
+        "phone": "+998977776655",
+        "role": "user",
+        "registeredAt": "2024-04-12T18:45:00Z"
+    }]
+  
