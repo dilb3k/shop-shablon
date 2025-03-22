@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "Kelin koynak",
+        "description": "Oq rangli, ipak matodan tikilgan kelin koynak.",
+        "price": 500000,
+        "category_id": 1,
+        "image": "https://images.pexels.com/photos/8459378/pexels-photo-8459378.jpeg?cs=srgb&dl=pexels-cristian-rojas-8459378.jpg&fm=jpg",
+        "inStock": 12,
+        "rating": 4,
+        "uptade_at": "2023-10-01T12:00:00Z",
+        "created_at": "2023-10-01T12:00:00Z",
+        "subcategory_id": 1
+     
+    }
+]

@@ -1,8 +1,119 @@
-
-
 .lato-thin {
   font-family: "Rubik", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
-  }
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-greatvibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+.nav-gradient {
+  background: linear-gradient(to right, #f5f5f5, #ffffff, #f5f5f5);
+  border-bottom: 1px solid #d4af37;
+}
+
+.gold-text {
+  color: #d4af37;
+}
+
+.gold-border {
+  border-color: #d4af37;
+}
+
+.gold-bg {
+  background-color: #d4af37;
+}
+
+.category-card {
+  border: 1px solid #f5f5f5;
+  transition: all 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+}
+
+.gold-hover:hover {
+  color: #d4af37 !important;
+}
+
+.menu-item-hover:hover {
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+}
+
+.gold-shadow {
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-greatvibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+/* Gold Styles */
+.gold-text {
+  color: #d4af37;
+}
+
+.gold-border {
+  border-color: #d4af37 !important;
+}
+
+.gold-bg {
+  background-color: #d4af37 !important;
+}
+
+.gold-shadow {
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+}
+
+/* Placeholderni gold qilish */
+input::placeholder {
+  color: #d4af37 !important;
+  opacity: 1;
+}
+
+input:focus {
+  border-color: #b8860b !important;
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+}
+
+/* SearchBar Input style */
+.search-input {
+  width: 100%;
+  border: 2px solid #d4af37;
+  border-radius: 50px;
+  color: #c09e30;
+  padding: 12px 40px;
+  font-family: 'Cormorant Garamond', serif;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #b8860b;
+  outline: none;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.search-icon {
+  color: #d4af37;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
