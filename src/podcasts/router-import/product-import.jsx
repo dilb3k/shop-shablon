@@ -1,5 +1,5 @@
 import React from 'react'
-import { getProduct } from '../../../api/products/router';
+import { getProduct } from '../../api/products/router';
 
 function ProductImport() {
     const products = getProduct();

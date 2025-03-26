@@ -2,15 +2,230 @@
     {
         "id": 1,
         "name": "Kelin koynak",
-        "description": "Oq rangli, ipak matodan tikilgan kelin koynak.",
+        "description": "Oq rangli, ipak matodan tikilgan kelin koynak. Mukammal to'y uchun ajoyib tanlov.",
+        "short_description": "Oq rangli, ipak matodan tikilgan.",
         "price": 500000,
         "category_id": 1,
-        "image": "https://images.pexels.com/photos/8459378/pexels-photo-8459378.jpeg?cs=srgb&dl=pexels-cristian-rojas-8459378.jpg&fm=jpg",
+        "image": [
+            "https://images.pexels.com/photos/8459378/pexels-photo-8459378.jpeg",
+            "https://images.pexels.com/photos/8459378/pexels-photo-8459378.jpeg"
+        ],
         "inStock": 12,
-        "rating": 4,
-        "uptade_at": "2023-10-01T12:00:00Z",
+        "rating": 1,
+        "updated_at": "2023-10-01T12:00:00Z",
         "created_at": "2023-10-01T12:00:00Z",
         "subcategory_id": 1
-     
+    },
+    {
+        "id": 2,
+        "name": "Erkaklar kostyumi",
+        "description": "Qora rangli, jun matodan tikilgan zamonaviy kostyum.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 800000,
+        "category_id": 1,
+        "image": "https://example.com/images/mens-suit.jpg",
+        "inStock": 8,
+        "rating": 5,
+        "updated_at": "2023-09-15T09:30:00Z",
+        "created_at": "2023-09-10T09:30:00Z",
+        "subcategory_id": 1
+    },
+    {
+        "id": 3,
+        "name": "Bola ko'ylagi",
+        "description": "Yashil rangli, paxta matodan tikilgan qizlar uchun ko'ylak.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 120000,
+        "category_id": 1,
+        "image": "https://example.com/images/girls-dress.jpg",
+        "inStock": 20,
+        "rating": 4.5,
+        "updated_at": "2023-08-20T14:45:00Z",
+        "created_at": "2023-08-15T14:45:00Z",
+        "subcategory_id": 1
+    },
+    {
+        "id": 4,
+        "name": "Sport kiyimlari",
+        "description": "Ko'k rangli, sintetik matodan tikilgan sport kiyimlari.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 250000,
+        "category_id": 1,
+        "image": "https://example.com/images/sportswear.jpg",
+        "inStock": 15,
+        "rating": 4.7,
+        "updated_at": "2023-07-25T11:20:00Z",
+        "created_at": "2023-07-20T11:20:00Z",
+        "subcategory_id": 1,
+        "details": {
+            "material": "Sintetik",
+            "color": "Ko'k",
+            "size": [
+                "S",
+                "M",
+                "L",
+                "XL"
+            ],
+            "style": "Sport",
+            "weight": "0.5 kg",
+            "care_instructions": "Mashinada yuvish mumkin"
+        }
+    },
+    {
+        "id": 5,
+        "name": "Qishki palto",
+        "description": "Qora rangli, jun matodan tikilgan issiq qishki palto.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 950000,
+        "category_id": 3,
+        "image": "https://example.com/images/winter-coat.jpg",
+        "inStock": 5,
+        "rating": 4.8,
+        "updated_at": "2023-06-30T16:10:00Z",
+        "created_at": "2023-06-25T16:10:00Z",
+        "subcategory_id": 1,
+        "details": {
+            "material": "Jun",
+            "color": "Qora",
+            "size": [
+                "L",
+                "XL"
+            ],
+            "style": "Qishki",
+            "weight": "2 kg",
+            "care_instructions": "Kimyoviy tozalash tavsiya etiladi"
+        }
+    },
+    {
+        "id": 6,
+        "name": "Yozgi ko'ylak",
+        "description": "Sariq rangli, ipak matodan tikilgan yengil yozgi ko'ylak.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 300000,
+        "category_id": 3,
+        "image": "https://example.com/images/summer-dress.jpg",
+        "inStock": 18,
+        "rating": 4.6,
+        "updated_at": "2023-05-15T10:00:00Z",
+        "created_at": "2023-05-10T10:00:00Z",
+        "subcategory_id": 1,
+        "details": {
+            "material": "Ipak",
+            "color": "Sariq",
+            "size": [
+                "S",
+                "M",
+                "L"
+            ],
+            "style": "Yozgi",
+            "weight": "0.4 kg",
+            "care_instructions": "Qo'lda yuvish tavsiya etiladi"
+        }
+    },
+    {
+        "id": 7,
+        "name": "Formal ko'ylak",
+        "description": "Oq rangli, paxta matodan tikilgan formal ko'ylak.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 200000,
+        "category_id": 3,
+        "image": "https://example.com/images/formal-shirt.jpg",
+        "inStock": 25,
+        "rating": 4.4,
+        "updated_at": "2023-04-20T13:15:00Z",
+        "created_at": "2023-04-15T13:15:00Z",
+        "subcategory_id": 2,
+        "details": {
+            "material": "Paxta",
+            "color": "Oq",
+            "size": [
+                "M",
+                "L",
+                "XL"
+            ],
+            "style": "Formal",
+            "weight": "0.3 kg",
+            "care_instructions": "30 gradusda yuvish mumkin"
+        }
+    },
+    {
+        "id": 8,
+        "name": "Shim",
+        "description": "Ko'k rangli, denim matodan tikilgan klassik shim.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 350000,
+        "category_id": 3,
+        "image": "https://example.com/images/jeans.jpg",
+        "inStock": 30,
+        "rating": 4.5,
+        "updated_at": "2023-03-25T17:30:00Z",
+        "created_at": "2023-03-20T17:30:00Z",
+        "subcategory_id": 1,
+        "details": {
+            "material": "Denim",
+            "color": "Ko'k",
+            "size": [
+                "S",
+                "M",
+                "L",
+                "XL"
+            ],
+            "style": "Klassik",
+            "weight": "0.7 kg",
+            "care_instructions": "Mashinada yuvish mumkin"
+        }
+    },
+    {
+        "id": 9,
+        "name": "Futbolka",
+        "description": "Oq rangli, paxta matodan tikilgan oddiy futbolka.",
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "price": 80000,
+        "category_id": 3,
+        "image": "https://example.com/images/t-shirt.jpg",
+        "inStock": 50,
+        "rating": 4.2,
+        "updated_at": "2023-02-28T08:45:00Z",
+        "created_at": "2023-02-25T08:45:00Z",
+        "subcategory_id": 1,
+        "details": {
+            "material": "Paxta",
+            "color": "Oq",
+            "size": [
+                "S",
+                "M",
+                "L",
+                "XL"
+            ],
+            "style": "Oddiy",
+            "weight": "0.2 kg",
+            "care_instructions": "30 gradusda yuvish mumkin"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Yengil kurtka",
+        "description": "Kulrang, sintetik matodan tikilgan yengil kurtka.",
+        "price": 400000,
+        "short_description": "Qora rangli, jun matodan tikilgan.",
+        "category_id": 3,
+        "image": "https://example.com/images/light-jacket.jpg",
+        "inStock": 10,
+        "rating": 4.3,
+        "updated_at": "2023-01-15T12:00:00Z",
+        "created_at": "2023-01-10T12:00:00Z",
+        "subcategory_id": 1,
+        "details": {
+            "material": "Sintetik",
+            "color": "Kulrang",
+            "size": [
+                "M",
+                "L",
+                "XL"
+            ],
+            "style": "Yengil",
+            "weight": "0.6 kg",
+            "care_instructions": "Mashinada yuvish mumkin"
+        }
     }
 ]

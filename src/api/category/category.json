@@ -1,6 +1,6 @@
 [
     {
-        "id": 212,
+        "id": 1,
         "name": "Kelin koylaklari",
         "slug": "wedding-dresses",
         "description": "Kelinlar uchun maxsus kiyimlar",
@@ -22,21 +22,6 @@
                 "id": 3,
                 "name": "Keng yubkalı kelin koylaklari",
                 "slug": "ball-gown"
-            },
-            {
-                "id": 4,
-                "name": "Plyaj to'ylari uchun kelin koylaklari",
-                "slug": "beach"
-            },
-            {
-                "id": 5,
-                "name": "Hashamatli kelin koylaklari",
-                "slug": "luxury"
-            },
-            {
-                "id": 6,
-                "name": "Qisqa kelin koylaklari",
-                "slug": "short"
             }
         ]
     },
@@ -44,34 +29,24 @@
         "id": 3,
         "name": "Kuyov kostyumlari",
         "slug": "groom-suits",
-        "description": "Kelinlar uchun maxsus kiyimlar",
+        "description": "Kuyovlar uchun sho'ponlar",
         "image": "https://example.com/images/kelinlik-kiyimlar.jpg",
         "uptade_at": "2023-10-01T12:00:00Z",
         "created_at": "2023-10-01T12:00:00Z",
         "subcategories": [
             {
                 "id": 1,
-                "name": "Klassik kostyumlar",
+                "name": "Klassik cho'ponlar",
                 "slug": "classic"
             },
             {
                 "id": 2,
-                "name": "Zamonaviy kostyumlar",
+                "name": "Zamonaviy cho'ponlar",
                 "slug": "modern"
             },
             {
-                "id": 3,
-                "name": "Smokinglar",
-                "slug": "tuxedo"
-            },
-            {
-                "id": 4,
-                "name": "Uch qismli kostyumlar",
-                "slug": "three-piece"
-            },
-            {
                 "id": 5,
-                "name": "Yozgi kostyumlar",
+                "name": "Yozgi cho'ponlar",
                 "slug": "summer"
             }
         ]
@@ -80,14 +55,14 @@
         "id": 4,
         "name": "To'y aksessuarlari",
         "slug": "wedding-accessories",
-        "description": "Kelinlar uchun maxsus kiyimlar",
+        "description": "Kelinlar uchun maxsus aksessuarlar",
         "image": "https://example.com/images/kelinlik-kiyimlar.jpg",
         "uptade_at": "2023-10-01T12:00:00Z",
         "created_at": "2023-10-01T12:00:00Z",
         "subcategories": [
             {
                 "id": 1,
-                "name": "Kelin paranjilari",
+                "name": "Fata",
                 "slug": "veils"
             },
             {
@@ -97,60 +72,50 @@
             },
             {
                 "id": 3,
-                "name": "Kamar va kamar",
-                "slug": "belts"
-            },
-            {
-                "id": 4,
                 "name": "Qo'lqoplar",
                 "slug": "gloves"
-            },
-            {
-                "id": 5,
-                "name": "Soch aksessuarlari",
-                "slug": "hair-accessories"
             }
         ]
     },
     {
         "id": 5,
-        "name": "To'y poyabzallari",
-        "slug": "wedding-shoes",
-        "description": "Kelinlar uchun maxsus kiyimlar",
-        "image": "https://example.com/images/kelinlik-kiyimlar.jpg",
-        "uptade_at": "2023-10-01T12:00:00Z",
+        "name": "To'y bezaklari",
+        "slug": "wedding-decorations",
+        "description": "To'y zallari va uylar uchun bezaklar",
+        "image": "https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg",
+        "updated_at": "2023-10-01T12:00:00Z",
         "created_at": "2023-10-01T12:00:00Z",
         "subcategories": [
             {
-                "id": 1,
-                "name": "Kelin uchun poyabzal",
-                "slug": "bride"
+                "id": 7,
+                "name": "Beshik bezaklari",
+                "slug": "cradle-decorations"
             },
             {
-                "id": 2,
-                "name": "Kuyov uchun poyabzal",
-                "slug": "groom"
+                "id": 9,
+                "name": "To'y stoli bezaklari",
+                "slug": "table-decorations"
             }
         ]
     },
     {
-        "id": 6,
-        "name": "To'y dekoratsiyasi",
-        "slug": "wedding-decor",
-        "description": "Kelinlar uchun maxsus kiyimlar",
-        "image": "https://example.com/images/kelinlik-kiyimlar.jpg",
-        "uptade_at": "2023-10-01T12:00:00Z",
+        "id": 2,
+        "name": "Sarpo va sandiqlar",
+        "slug": "bridal-sets",
+        "description": "Kelinlar uchun sarpo to'plamlari va sandiqlar",
+        "image": "https://images.pexels.com/photos/7750919/pexels-photo-7750919.jpeg",
+        "updated_at": "2023-10-01T12:00:00Z",
         "created_at": "2023-10-01T12:00:00Z",
         "subcategories": [
             {
-                "id": 1,
-                "name": "Stol dekoratsiyasi",
-                "slug": "table-decor"
+                "id": 4,
+                "name": "Beshik sandiqlari to'plamlari",
+                "slug": "golden-sets"
             },
             {
-                "id": 2,
-                "name": "Marosim joyi dekoratsiyasi",
-                "slug": "venue-decor"
+                "id": 6,
+                "name": "Kelin sandiqlari",
+                "slug": "bridal-chests"
             }
         ]
     },
@@ -170,7 +135,7 @@
             },
             {
                 "id": 2,
-                "name": "Kuyov kostyumlari",
+                "name": "Kuyov cho'ponlari",
                 "slug": "groom-suits"
             },
             {
@@ -180,7 +145,13 @@
             },
             {
                 "id": 4,
-                "name": "Poyabzallar",
+                "name": "Sarpo va sandiqlar",
+                "slug": "shoes"
+            }
+            ,
+            {
+                "id": 5,
+                "name": "To'y bezaklari",
                 "slug": "shoes"
             }
         ]

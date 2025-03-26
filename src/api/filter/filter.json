@@ -1,0 +1,13 @@
+{
+    "filters": {
+        "category_id": 3,
+        "price": {
+            "min": 300000,
+            "max": 500000
+        },
+        "rating": {
+            "min": 4
+        },
+        "size": "L"
+    }
+}

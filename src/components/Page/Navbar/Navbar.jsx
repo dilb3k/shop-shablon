@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getCategory } from '../../../api/category/router';
 
-function Navbar() {
+function Navbar({ onCategorySelect }) {
     const [categories, setCategories] = useState([]);
     const [activeCategory, setActiveCategory] = useState(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [hoverTimeout, setHoverTimeout] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchCategories() {
+            setIsLoading(true);
             try {
                 const data = await getCategory();
                 setCategories(data);
+                setError(null);
             } catch (error) {
-                console.error('Kategoriyalarni yuklashda xatolik:', error);
+                console.error('Error loading categories:', error);
+                setError('Failed to load categories. Please try again later.');
+            } finally {
+                setIsLoading(false);
             }
         }
         fetchCategories();
@@ -46,10 +53,33 @@ function Navbar() {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as needed
+    const handleCategoryClick = (category, subcategory = null) => {
+        // Tanlangan category va subcategoryni LocalStorage ga saqlash (id + name)
+        localStorage.setItem(
+            "selectedCategory",
+            JSON.stringify({ id: category.id, name: category.name })
+        );
+
+        if (subcategory) {
+            localStorage.setItem(
+                "selectedSubcategory",
+                JSON.stringify({ id: subcategory.id, name: subcategory.name })
+            );
+        } else {
+            localStorage.removeItem("selectedSubcategory"); // Subcategory yo‘q bo‘lsa, o‘chirish
+        }
+
+        // Ma'lumotni App komponentiga yuborish
+        onCategorySelect(category, subcategory);
+
+        // Mobil menyuni yopish
+        setIsMobileMenuOpen(false);
+    };
+
+
 
     return (
-        <div className="w-full bg-white sticky top-0 z-0 font-serif">
+        <div className="w-full bg-white relative  top-0 z-10 font-serif">
             {/* Custom font import - add to your CSS file */}
             <style>
                 {`
@@ -105,6 +135,20 @@ function Navbar() {
                 `}
             </style>
 
+            {/* Error state */}
+            {error && (
+                <div className="bg-red-100 text-red-700 p-2 text-center">
+                    {error}
+                </div>
+            )}
+
+            {/* Loading state */}
+            {isLoading && (
+                <div className="text-center py-2 gold-text">
+                    Loading categories...
+                </div>
+            )}
+
             {/* Desktop Navigation */}
             <nav className="hidden md:block shadow-md">
                 <div className="nav-gradient py-4 px-8">
@@ -121,11 +165,15 @@ function Navbar() {
                                     <span className="mr-2 gold-text">❧</span>
                                     <span className="border-b border-transparent group-hover:gold-border">Katalog</span>
                                 </button>
-                                {activeCategory === 'catalog' && (
-                                    <div className="absolute left-0 bg-white z-50 shadow-xl border border-gray-100 rounded-lg mt-2 w-screen max-w-4xl p-6 z-20 grid grid-cols-3 gap-6 gold-shadow">
+                                {activeCategory === 'catalog' && categories.length > 0 && (
+                                    <div className="absolute left-0 bg-white shadow-xl border border-gray-100 rounded-lg mt-2 w-screen max-w-4xl p-6 z-20 grid grid-cols-3 gap-6 gold-shadow">
                                         {categories.map(category => (
-                                            <div key={category.id} className="category-card bg-white rounded-lg p-4 hover:border-gold-500 transition-all duration-300">
-                                                <Link to={`/category/${category.slug}`} className="block text-center">
+                                            <div key={category.id} className="category-card bg-white rounded-lg p-4 transition-all duration-300">
+                                                <Link
+                                                    to={`/category/${category.slug}`}
+                                                    className="block text-center"
+                                                    onClick={() => handleCategoryClick(category)}
+                                                >
                                                     <div className="h-40 overflow-hidden rounded-md mb-3 border gold-border">
                                                         <img
                                                             src={category.image || '/api/placeholder/400/320'}
@@ -153,6 +201,7 @@ function Navbar() {
                                     <Link
                                         to={`/category/${category.slug}`}
                                         className="text-lg font-cormorant font-semibold text-gray-800 gold-hover transition-all duration-300"
+                                        onClick={() => handleCategoryClick(category)}
                                     >
                                         <span className="border-b border-transparent group-hover:gold-border">
                                             {category.name}
@@ -165,6 +214,7 @@ function Navbar() {
                                                     <li key={subcategory.id}>
                                                         <Link
                                                             to={`/category/${category.slug}/${subcategory.slug}`}
+                                                            onClick={() => handleCategoryClick(category, subcategory)}
                                                             className="gold-hover block p-2 rounded-md menu-item-hover transition-colors font-cormorant"
                                                         >
                                                             {subcategory.name}
@@ -190,6 +240,7 @@ function Navbar() {
                     <button
                         onClick={toggleMobileMenu}
                         className="text-gray-700 gold-hover"
+                        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
                     >
                         {isMobileMenuOpen ? (
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -217,6 +268,10 @@ function Navbar() {
                                         <Link
                                             to={`/category/${category.slug}`}
                                             className="text-lg font-greatvibes gold-text"
+                                            onClick={(e) => {
+                                                e.stopPropagation(); // Prevent toggling when clicking the link
+                                                handleCategoryClick(category);
+                                            }}
                                         >
                                             ❧ {category.name}
                                         </Link>
@@ -238,6 +293,7 @@ function Navbar() {
                                                 <Link
                                                     key={subcategory.id}
                                                     to={`/category/${category.slug}/${subcategory.slug}`}
+                                                    onClick={() => handleCategoryClick(category, subcategory)}
                                                     className="block py-2 text-gray-700 gold-hover font-cormorant text-center border-b border-gray-100"
                                                 >
                                                     {subcategory.name}

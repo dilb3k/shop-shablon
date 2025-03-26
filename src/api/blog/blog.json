@@ -5,6 +5,22 @@
         "content": "Bu yilgi mavsumda eng yangi kelin koynak modellari...",
         "author": "Admin",
         "date": "2023-10-01T12:00:00Z",
-        "image": "https://example.com/images/blog1.jpg"
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe1JciGt9CdGDTYhgxVIeXuITbl6idGM0tnQ&s"
+    },
+    {
+        "id": 2,
+        "title": "Zamonaviy to'y liboslari",
+        "content": "Eng mashhur dizaynerlardan zamonaviy to'y liboslari kolleksiyasi...",
+        "author": "Admin",
+        "date": "2023-10-05T14:30:00Z",
+        "image": "https://cdn.pixabay.com/photo/2018/08/04/11/30/draw-3583548_1280.png"
+    },
+    {
+        "id": 3,
+        "title": "Kelin taqinchoqlari",
+        "content": "To'y kunida kelinlarning eng muhim taqinchoqlari haqida...",
+        "author": "Admin",
+        "date": "2023-10-10T09:15:00Z",
+        "image": "https://png.pngtree.com/thumb_back/fh260/background/20240801/pngtree-new-cb-background-images-photos-pics-wallpaper-pictures-image_16123145.jpg"
     }
 ]
