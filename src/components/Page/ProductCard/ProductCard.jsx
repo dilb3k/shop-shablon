@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, memo, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
-import { Heart, ShoppingCart, Star } from 'lucide-react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Heart, ShoppingCart, Star } from 'lucide-react';
 import { getProduct } from '../../../api/products/router';
 import NoProducts from '../NotFound/NoProducts';
 import CustomImage from '../../ui/image/CustomImage';
@@ -27,7 +27,8 @@ const ProductCard = memo(({ searchValue = '' }) => {
 
         const { category, subcategory } = getLocalStorageData();
         setCategoryData({ category, subcategory });
-    }, [params.categorySlug, params.subcategorySlug]);
+    }, []);
+
 
     const [categoryData, setCategoryData] = useState({
         category: { id: 0, name: "all" },
@@ -63,45 +64,27 @@ const ProductCard = memo(({ searchValue = '' }) => {
             isMounted = false;
         };
     }, [params.categorySlug, params.subcategorySlug]);
-
     const filteredProducts = useMemo(() => {
         return products.filter(product => {
-            if (!product.name) return false; // Skip products without names
+            if (!product.name) return false; // Ismi yo‘q mahsulotlarni o‘tkazib yuborish
 
-            // Handle "All" category case (id === 0 means show all)
-            const isAllCategory = categoryData.category?.id == 0;
+            const isAllCategory = categoryData.category?.id === 0;
 
-            // Category matching logic
-            const matchesCategory = isAllCategory
-                ? true
-                : categoryData.category?.id
-                    ? product.category_id == categoryData.category.id
-                    : true;
+            const matchesCategory = isAllCategory || product.category == categoryData.category.id;
+            const matchesSubcategory = isAllCategory || (categoryData.subcategory?.id ? product.subcategory == categoryData.subcategory.id : true);
 
-            // Subcategory matching logic
-            const matchesSubcategory = isAllCategory
-                ? true
-                : categoryData.subcategory?.id
-                    ? product.subcategory_id === categoryData.subcategory.id
-                    : true;
+            if (!searchValue.trim()) return matchesCategory && matchesSubcategory;
 
-            // Combine category filters
-            const categoryMatch = matchesCategory && matchesSubcategory;
-
-            // If no search value, just return category matches
-            if (!searchValue.trim()) return categoryMatch;
-                
-            // Search matching logic
             const searchLower = searchValue.toLowerCase();
-            
             const matchesSearch = (
                 product.name.toLowerCase().includes(searchLower) ||
                 (product.description?.toLowerCase().includes(searchLower) || false)
             );
 
-            return categoryMatch && matchesSearch;
+            return matchesCategory && matchesSubcategory && matchesSearch;
         });
     }, [products, categoryData, searchValue]);
+
 
     // ... rest of your component code remains the same ...
     const renderRating = useCallback((rating) => {
@@ -147,7 +130,7 @@ const ProductCard = memo(({ searchValue = '' }) => {
 
     return (
         <div className="container mx-auto px-4 py-6">
-         
+
             <div className="flex flex-col md:flex-row justify-center items-center mb-6 gap-4">
                 <div className="text-center md:text-center">
                     {categoryData.category?.name !== "all" && (
@@ -196,12 +179,27 @@ const ProductCard = memo(({ searchValue = '' }) => {
         </div>
     );
 });
-
 const ProductItem = memo(({ product, hoveredProduct, setHoveredProduct, renderRating }) => {
+    const navigate = useNavigate();
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const isHovered = hoveredProduct === product.id;
     const priceText = typeof product.price === 'number'
         ? `${product.price.toLocaleString()} sum`
         : product.price;
+
+    const currentImage = product.images?.[currentImageIndex]?.image || '/default-product.png';
+
+    const nextImage = () => {
+        setCurrentImageIndex(prev =>
+            prev === product.images.length - 1 ? 0 : prev + 1
+        );
+    };
+
+    const prevImage = () => {
+        setCurrentImageIndex(prev =>
+            prev === 0 ? product.images.length - 1 : prev - 1
+        );
+    };
 
     return (
         <div
@@ -211,26 +209,36 @@ const ProductItem = memo(({ product, hoveredProduct, setHoveredProduct, renderRa
         >
             <div className="relative h-56 overflow-hidden">
                 <CustomImage
-                    src={product.image}
+                    src={currentImage}
                     alt={product.name}
-                    className="transition-transform duration-500 hover:scale-105"
-                    loading="lazy"
+                    className="w-full h-full object-cover"
+                    loading="eager"
                 />
 
-                <div className={`absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center gap-2 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-                    <button
-                        className="bg-white text-amber-600 p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors shadow-sm"
-                        aria-label={`Add ${product.name} to cart`}
-                    >
-                        <ShoppingCart size={18} />
-                    </button>
-                    <button
-                        className="bg-white text-amber-600 p-2 rounded-full hover:bg-amber-600 hover:text-white transition-colors shadow-sm"
-                        aria-label={`Add ${product.name} to favorites`}
-                    >
-                        <Heart size={18} />
-                    </button>
-                </div>
+                {isHovered && product.images?.length > 1 && (
+                    <>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                prevImage();
+                            }}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full shadow-md hover:bg-white"
+                            aria-label="Previous image"
+                        >
+                            <ChevronLeft size={18} />
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                nextImage();
+                            }}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1 rounded-full shadow-md hover:bg-white"
+                            aria-label="Next image"
+                        >
+                            <ChevronRight size={18} />
+                        </button>
+                    </>
+                )}
 
                 {product.inStock > 0 && (
                     <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded text-xs font-medium">
@@ -263,7 +271,9 @@ const ProductItem = memo(({ product, hoveredProduct, setHoveredProduct, renderRa
                     <div className="text-xs text-gray-500 font-cormorant">
                         {new Date(product.created_at).toLocaleDateString()}
                     </div>
+
                     <button
+                        onClick={() => navigate(`/products/${product.id}`)}
                         className="bg-amber-600 hover:bg-amber-700 text-white py-1 px-3 rounded text-sm transition-colors font-cormorant font-medium"
                         aria-label={`View details for ${product.name}`}
                     >

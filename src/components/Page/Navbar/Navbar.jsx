@@ -37,7 +37,7 @@ function Navbar({ onCategorySelect }) {
     const handleCategoryLeave = () => {
         const timeout = setTimeout(() => {
             setActiveCategory(null);
-        }, 300); // 300ms delay before closing
+        }, 100); // 300ms delay before closing
         setHoverTimeout(timeout);
     };
 
@@ -54,32 +54,39 @@ function Navbar({ onCategorySelect }) {
     };
 
     const handleCategoryClick = (category, subcategory = null) => {
-        // Tanlangan category va subcategoryni LocalStorage ga saqlash (id + name)
-        localStorage.setItem(
-            "selectedCategory",
-            JSON.stringify({ id: category.id, name: category.name })
-        );
-
-        if (subcategory) {
+        // If it's the Sale category (special case)
+        if (category.id === 'discounts') {
             localStorage.setItem(
-                "selectedSubcategory",
-                JSON.stringify({ id: subcategory.id, name: subcategory.name })
+                "selectedCategory",
+                JSON.stringify({ id: 'discounts', name: 'Chegirmalar' })
             );
+            localStorage.removeItem("selectedSubcategory");
         } else {
-            localStorage.removeItem("selectedSubcategory"); // Subcategory yo‘q bo‘lsa, o‘chirish
+            // Regular category handling
+            localStorage.setItem(
+                "selectedCategory",
+                JSON.stringify({ id: category.id, name: category.name })
+            );
+
+            if (subcategory) {
+                localStorage.setItem(
+                    "selectedSubcategory",
+                    JSON.stringify({ id: subcategory.id, name: subcategory.name })
+                );
+            } else {
+                localStorage.removeItem("selectedSubcategory");
+            }
         }
 
-        // Ma'lumotni App komponentiga yuborish
+        // Pass the selection to parent component
         onCategorySelect(category, subcategory);
 
-        // Mobil menyuni yopish
+        // Close mobile menu
         setIsMobileMenuOpen(false);
     };
 
-
-
     return (
-        <div className="w-full bg-white relative  top-0 z-10 font-serif">
+        <div className="w-full bg-white relative top-0 z-10 font-serif">
             {/* Custom font import - add to your CSS file */}
             <style>
                 {`
@@ -152,10 +159,10 @@ function Navbar({ onCategorySelect }) {
             {/* Desktop Navigation */}
             <nav className="hidden md:block shadow-md">
                 <div className="nav-gradient py-4 px-8">
-                    <div className="flex items-center gap-14">
-                        {/* Categories */}
-                        <div className="flex space-x-10">
-                            {/* Katalog dropdown */}
+                    <div className="flex items-center justify-between w-full">
+                        {/* Left side: Categories */}
+                        <div className="flex items-center space-x-10">
+                            {/* Catalog Dropdown */}
                             <div
                                 className="group relative"
                                 onMouseEnter={() => handleCategoryHover('catalog')}
@@ -165,6 +172,8 @@ function Navbar({ onCategorySelect }) {
                                     <span className="mr-2 gold-text">❧</span>
                                     <span className="border-b border-transparent group-hover:gold-border">Katalog</span>
                                 </button>
+
+                                {/* Catalog Dropdown content */}
                                 {activeCategory === 'catalog' && categories.length > 0 && (
                                     <div className="absolute left-0 bg-white shadow-xl border border-gray-100 rounded-lg mt-2 w-screen max-w-4xl p-6 z-20 grid grid-cols-3 gap-6 gold-shadow">
                                         {categories.map(category => (
@@ -190,7 +199,7 @@ function Navbar({ onCategorySelect }) {
                                 )}
                             </div>
 
-                            {/* Individual categories with dropdowns */}
+                            {/* Sub Categories */}
                             {categories.map(category => (
                                 <div
                                     key={category.id}
@@ -203,9 +212,7 @@ function Navbar({ onCategorySelect }) {
                                         className="text-lg font-cormorant font-semibold text-gray-800 gold-hover transition-all duration-300"
                                         onClick={() => handleCategoryClick(category)}
                                     >
-                                        <span className="border-b border-transparent group-hover:gold-border">
-                                            {category.name}
-                                        </span>
+                                        <span className="border-b border-transparent group-hover:gold-border">{category.name}</span>
                                     </Link>
                                     {category.subcategories && category.subcategories.length > 0 && activeCategory === category.id && (
                                         <div className="absolute left-0 bg-white shadow-lg border border-gray-100 rounded-lg w-64 p-4 mt-1 z-20 gold-shadow">
@@ -226,6 +233,50 @@ function Navbar({ onCategorySelect }) {
                                     )}
                                 </div>
                             ))}
+                        </div>
+
+                        {/* Sale Section */}
+                        <div
+                            className="group relative"
+                            onMouseEnter={() => handleCategoryHover('discounts')}
+                            onMouseLeave={handleCategoryLeave}
+                        >
+                            <button
+                                onClick={() => handleCategoryClick({ id: 'discounts', name: 'Chegirmalar' })}
+                                className="text-lg font-cormorant font-semibold text-gray-800 gold-hover transition-all duration-300"
+                            >
+                                Chegirmalar
+                            </button>
+                            {activeCategory === 'discounts' && (
+                                <div className="absolute right-10 bg-white shadow-lg border border-gray-100 rounded-lg w-64 p-4 mt-1 z-20 gold-shadow">
+                                    <ul className="space-y-2 text-gray-700">
+                                        <li>
+                                            <Link
+                                                to="/sale/kostyum"
+                                                className="gold-hover block p-2 rounded-md menu-item-hover transition-colors font-cormorant"
+                                                onClick={() => handleCategoryClick(
+                                                    { id: 'discounts', name: 'Chegirmalar' },
+                                                    { id: 'discounts-kostyum', name: 'Kostyumlar' }
+                                                )}
+                                            >
+                                                Kostyumlar
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                to="/sale/kelin-koynak"
+                                                className="gold-hover block p-2 rounded-md menu-item-hover transition-colors font-cormorant"
+                                                onClick={() => handleCategoryClick(
+                                                    { id: 'discounts', name: 'Chegirmalar' },
+                                                    { id: 'discounts-kelin-koynak', name: 'Kelin Koynak' }
+                                                )}
+                                            >
+                                                Kelin Koynak
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -257,7 +308,7 @@ function Navbar({ onCategorySelect }) {
                 {/* Mobile Menu */}
                 {isMobileMenuOpen && (
                     <div className="bg-white p-4 shadow-inner">
-                        <div className="space-y-2 py-2">
+                        <div className="space-y-1 py-2">
                             {/* Mobile Categories */}
                             {categories.map(category => (
                                 <div key={category.id} className="border-b gold-border pb-2">
@@ -269,7 +320,7 @@ function Navbar({ onCategorySelect }) {
                                             to={`/category/${category.slug}`}
                                             className="text-lg font-greatvibes gold-text"
                                             onClick={(e) => {
-                                                e.stopPropagation(); // Prevent toggling when clicking the link
+                                                e.stopPropagation();
                                                 handleCategoryClick(category);
                                             }}
                                         >
@@ -303,6 +354,57 @@ function Navbar({ onCategorySelect }) {
                                     )}
                                 </div>
                             ))}
+
+                            {/* Sale Section in Mobile */}
+                            <div className="border-b gold-border pb-2">
+                                <div
+                                    className="flex justify-between items-center py-2"
+                                    onClick={() => toggleCategory('discounts')}
+                                >
+                                    <button
+                                        className="text-lg font-greatvibes gold-text"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleCategoryClick({ id: 'discounts', name: 'Chegirmalar' });
+                                        }}
+                                    >
+                                        ❧ Chegirmalar
+                                    </button>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className={`h-5 w-5 transition-transform ${activeCategory === 'discounts' ? 'transform rotate-180' : ''} gold-text`}
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </div>
+                                {activeCategory === 'discounts' && (
+                                    <div className="ml-4 mt-2 space-y-1 bg-gray-50 p-3 rounded-lg gold-shadow">
+                                        <Link
+                                            to="/sale/kostyum"
+                                            onClick={() => handleCategoryClick(
+                                                { id: 'discounts', name: 'Chegirmalar' },
+                                                { id: 'discounts-kostyum', name: 'Kostyumlar' }
+                                            )}
+                                            className="block py-2 text-gray-700 gold-hover font-cormorant text-center border-b border-gray-100"
+                                        >
+                                            Kostyumlar
+                                        </Link>
+                                        <Link
+                                            to="/sale/kelin-koynak"
+                                            onClick={() => handleCategoryClick(
+                                                { id: 'discounts', name: 'Chegirmalar' },
+                                                { id: 'discounts-kelin-koynak', name: 'Kelin Koynak' }
+                                            )}
+                                            className="block py-2 text-gray-700 gold-hover font-cormorant text-center"
+                                        >
+                                            Kelin Koynak
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 )}

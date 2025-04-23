@@ -1,5 +1,11 @@
-import category from "./category.json";
+import axios from "axios";
 
-export function getCategory() {
-    return category;
+export async function getCategory() {
+    try {
+        const response = await axios.get("http://localhost:8000/category/categories/");
+        return response.data;
+    } catch (error) {
+        console.error("Xatolik:", error);
+        return [];
+    }
 }

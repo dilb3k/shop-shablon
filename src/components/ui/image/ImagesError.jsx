@@ -9,7 +9,7 @@ export default function ImageErrorFallback({ onRetry }) {
         <div className="flex flex-col items-center justify-center w-full h-full p-4 bg-gray-50">
             <ImageOff size={48} style={{ color: goldColor }} className="mb-2" />
             <p className="text-center font-medium" style={{ color: goldColor }}>
-                Rasmni yuklab bo'lmadi
+                Mahsulotda rasim mavjud emas
             </p>
         
         </div>

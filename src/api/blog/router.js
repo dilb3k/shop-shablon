@@ -1,5 +1,11 @@
-import blog from "./blog.json";
+import axios from "axios";
 
-export function getBlog() {
-    return blog;
+export async function getBlog() {
+    try {
+        const response = await axios.get("http://localhost:8000/blog/blog/");
+        return response.data;
+    } catch (error) {
+        console.error("Xatolik:", error);
+        return [];
+    }
 }
